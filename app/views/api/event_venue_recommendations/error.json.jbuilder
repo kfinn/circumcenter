@@ -1,4 +1,4 @@
 json.recommendation do
-  json.partial! @recommendation
+  json.partial! @event_venue_recommendation
 end
-json.errors(@recommendation.errors.details)
+json.errors(@event_venue_recommendation.errors.details)

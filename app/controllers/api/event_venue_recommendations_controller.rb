@@ -1,9 +1,9 @@
 class API::EventVenueRecommendationsController < API::APIController
   def create
     event = Event.find(params[:event_id])
-    @recommendation = event.recommendations.build(create_params)
-    if @recommendation.save
-      redirect_to api_recommendation_path(@recommendation)
+    @event_venue_recommendation = event.build_venue_recommendation(create_params)
+    if @event_venue_recommendation.save
+      head :created
     else
       render :error, status: :unprocessable_entity
     end
@@ -13,11 +13,10 @@ class API::EventVenueRecommendationsController < API::APIController
 
   def create_params
     params.permit(
-      recommendation: [
-        venue_attributes: [
-          :name
-        ]
+      event_venue_recommendation: [
+        recommendation_attributes: [],
+        venue_attributes: [:name]
       ]
-    )[:recommendation] || {}
+    )[:event_venue_recommendation] || {}
   end
 end

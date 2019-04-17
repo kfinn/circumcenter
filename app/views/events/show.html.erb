@@ -1,0 +1,20 @@
+<h1>Event</h1>
+<div><%= @event.id %></div>
+<div><%= @event.start %></div>
+
+<script>
+App.cable.subscriptions.create(
+  {
+    channel: "EventVenueRecommendationsChannel",
+    id: "<%= @event.id %>"
+  },
+  {
+    connected: () => { console.log('connected') },
+    disconnected: () => { console.log('disconnected') },
+    received: (data) => {
+      console.log('received')
+      console.log(data)
+    }
+  }
+)
+</script>
