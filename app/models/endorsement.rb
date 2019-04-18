@@ -1,6 +1,6 @@
-class Recommendation < ApplicationRecord
-  belongs_to :event
-  belongs_to :venue
+class Endorsement < ApplicationRecord
+  belongs_to :venue_suggestion
+  has_one :event, through: :venue_suggestion
 
   after_create :broadcast_to_event
 
