@@ -80,6 +80,6 @@ test:
 #
 production:
   <<: *default
-  database: circumcentral_rails_production
-  username: circumcentral_rails
-  password: <%= ENV['CIRCUMCENTRAL_RAILS_DATABASE_PASSWORD'] %>
+  database: circumcenter_production
+  username: circumcenter
+  password: <%= ENV['CIRCUMCENTER_DATABASE_PASSWORD'] %>
