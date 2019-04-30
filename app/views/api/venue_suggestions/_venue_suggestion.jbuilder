@@ -1,5 +1,3 @@
-json.recommendation do
-end
 json.venue do
-  json.call(@event_venue_recommendation.venue, :name, :id)
+  json.call(@venue_suggestion, :id, :google_place_id)
 end

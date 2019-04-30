@@ -12,6 +12,6 @@ class API::VenueSuggestionsController < API::APIController
   private
 
   def create_params
-    params.permit(venue_suggestion: [:name])[:venue_suggestion] || {}
+    params.permit(venue_suggestion: [:google_place_id])[:venue_suggestion] || {}
   end
 end
