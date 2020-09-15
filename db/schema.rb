@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_29_190244) do
+ActiveRecord::Schema.define(version: 2019_04_30_081657) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -25,6 +25,18 @@ ActiveRecord::Schema.define(version: 2019_04_29_190244) do
 
   create_table "events", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.datetime "start", null: false
+  end
+
+  create_table "participants", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "event_id", null: false
+    t.uuid "visitor_id", null: false
+    t.string "name"
+    t.decimal "latitude"
+    t.decimal "longitude"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["event_id"], name: "index_participants_on_event_id"
+    t.index ["visitor_id"], name: "index_participants_on_visitor_id"
   end
 
   create_table "venue_suggestions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -43,7 +55,14 @@ ActiveRecord::Schema.define(version: 2019_04_29_190244) do
     t.index ["venue_suggestion_id"], name: "index_vetoes_on_venue_suggestion_id"
   end
 
+  create_table "visitors", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   add_foreign_key "endorsements", "venue_suggestions", on_update: :cascade, on_delete: :cascade
+  add_foreign_key "participants", "events", on_update: :cascade, on_delete: :cascade
+  add_foreign_key "participants", "visitors", on_update: :cascade, on_delete: :cascade
   add_foreign_key "venue_suggestions", "events", on_update: :cascade, on_delete: :cascade
   add_foreign_key "vetoes", "venue_suggestions", on_update: :cascade, on_delete: :cascade
 end

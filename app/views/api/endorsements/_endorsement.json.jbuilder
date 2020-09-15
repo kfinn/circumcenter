@@ -1,1 +1,1 @@
-json.call(recommendation, :id)
+json.call(endorsement, :id)

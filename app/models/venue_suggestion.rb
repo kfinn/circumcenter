@@ -1,5 +1,5 @@
 class VenueSuggestion < ApplicationRecord
-  validates :google_place_id, presence: true
+  validates :google_place_id, presence: true, uniqueness: { scope: :event_id }
   validate :place_details_must_exist
 
   belongs_to :event

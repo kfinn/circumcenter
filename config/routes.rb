@@ -4,7 +4,8 @@ Rails.application.routes.draw do
   namespace :api do
     shallow do
       resources :events, only: [:create, :show] do
-        resources :venue_suggestions, only: [:create] do
+        resource :current_participant, only: :update
+        resources :venue_suggestions, only: :create do
           resources :endorsements, only: :create
           resources :vetoes, only: :create
         end

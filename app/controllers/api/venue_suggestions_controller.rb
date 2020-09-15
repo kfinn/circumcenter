@@ -5,7 +5,7 @@ class API::VenueSuggestionsController < API::APIController
     if @venue_suggestion.save
       head :created
     else
-      render :error, status: :unprocessable_entity
+      render :error, status: :unprocessable_entitys
     end
   end
 
